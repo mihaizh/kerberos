@@ -3,7 +3,10 @@
     {
       'target_name': 'kerberos',
       'type': 'loadable_module',
-      'include_dirs': [  "<!(node -p \"require('node-addon-api').include_dir\")" ],
+      'include_dirs': [
+        "/usr/local/include",
+        "<!(node -p \"require('node-addon-api').include_dir\")"
+      ],
       'sources': [
         'src/kerberos.cc'
       ],
@@ -34,7 +37,7 @@
               'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES', # -fvisibility=hidden
             }
         }],
-        ['OS=="mac" or OS=="linux"', {
+        ['OS=="mac" or OS=="linux" or OS=="freebsd"', {
           'sources': [
             'src/unix/base64.cc',
             'src/unix/kerberos_gss.cc',
